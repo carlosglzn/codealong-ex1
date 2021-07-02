@@ -23,6 +23,7 @@ const myGameArea = {
 
 class Component {
     constructor(width, height, color, x, y){
+
         this.speedX = 0
         this.speedY = 0
         this.width = width
@@ -74,11 +75,13 @@ class Component {
 
 // MOTOR DEL JUEGO
 function updateGameArea() {
+
     myGameArea.clear()
     player.newPos()
     player.update()
     updateObstacles()
     checkGameOver()
+
 }
 
 function updateObstacles() {
@@ -91,9 +94,17 @@ function updateObstacles() {
     myGameArea.frames += 1
     if (myGameArea.frames % 120 === 0) {
         let canvasWidth = myGameArea.canvas.width
-        let height = 100
-        let gap = 100
         
+        
+        
+        let minHeight = 20
+        let maxHeight = 200
+        let minGap = 70
+        let maxGap = 100
+
+        let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight)
+        let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap)
+
         myObstacles.push(new Component(10, height, "green", canvasWidth, 0))
         myObstacles.push(new Component(10, canvasWidth - height - gap, "green", canvasWidth, height + gap))
     }
